@@ -77,7 +77,7 @@ void CLZObject::BeginCompress(const void * pvIn, UINT uiInLen)
 
 bool CLZObject::Compress()
 {
-	UINT	iOutLen;
+	lzo_uint	iOutLen;
 	BYTE *	pbBuffer;
 
 	pbBuffer = m_pbBuffer + sizeof(THeader);
@@ -92,7 +92,7 @@ bool CLZObject::Compress()
 		return false;
 	}
 
-	m_pHeader->dwCompressedSize = iOutLen;
+	m_pHeader->dwCompressedSize = static_cast<DWORD>(iOutLen);
 	m_bCompressed = true;
 
 	return true;
@@ -118,7 +118,7 @@ bool CLZObject::BeginDecompress(const void * pvIn)
 
 bool CLZObject::Decompress(DWORD * pdwKey)
 {
-	UINT uiSize;
+	lzo_uint uiSize;
 	int r;
 
 	if (m_pHeader->dwEncryptSize)
@@ -141,7 +141,7 @@ bool CLZObject::Decompress(DWORD * pdwKey)
 	}
 	else
 	{
-		uiSize = m_pHeader->dwRealSize;
+		uiSize = static_cast<lzo_uint>(m_pHeader->dwRealSize);
 
 		if (LZO_E_OK != (r = lzo1x_decompress_safe(m_pbIn, m_pHeader->dwCompressedSize, m_pbBuffer, &uiSize, NULL)))
 		{

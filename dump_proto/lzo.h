@@ -1,8 +1,8 @@
 #ifndef __INC_METIN_II_371GNFBQOCJ_LZO_H__
 #define __INC_METIN_II_371GNFBQOCJ_LZO_H__
 
-#include "../lzo/lzoconf.h"
-#include "../lzo/lzo1x.h"
+#include "../lzo-2.10/include/lzo/lzoconf.h"
+#include "../lzo-2.10/include/lzo/lzo1x.h"
 #include "Singleton.h"
 
 typedef unsigned char BYTE;

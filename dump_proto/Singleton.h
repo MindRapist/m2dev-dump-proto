@@ -51,25 +51,36 @@ template <typename T> class singleton
 public: 
 	singleton()
 	{ 
-		assert(!ms_singleton);
-		int offset = (int) (T*) 1 - (int) (CSingleton <T>*) (T*) 1; 
-		ms_singleton = (T*) ((int) this + offset);
+		if (!ms_singleton)
+		{
+			int offset = (int) (T*) 1 - (int) (CSingleton <T>*) (T*) 1; 
+			ms_singleton = (T*) ((int) this + offset);
+		}
 	} 
 
 	virtual ~singleton()
 	{ 
-		assert(ms_singleton);
-		ms_singleton = 0; 
+		if (ms_singleton == this)
+			ms_singleton = 0; 
 	}
 
 	__forceinline static T & Instance()
 	{
-		assert(ms_singleton);
+		if (!ms_singleton)
+		{
+			static T s_instance;
+			ms_singleton = &s_instance;
+		}
 		return (*ms_singleton);
 	}
 
 	__forceinline static T * InstancePtr()
 	{ 
+		if (!ms_singleton)
+		{
+			static T s_instance;
+			ms_singleton = &s_instance;
+		}
 		return (ms_singleton);
 	}
 
