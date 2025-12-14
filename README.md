@@ -54,7 +54,7 @@ We have dramatically simplified the process for building and deploying item and 
 
 The compiler now intelligently generates all required files in their final destinations:
 
-**EXAMPLE:**
+**EXAMPLE:** `item_names.txt`, `item_proto.txt`, `item_names_ru.txt`, `mob_names.txt`, `mob_proto.txt` and `mob_names_cz.txt` in the same directory as `dump_proto.exe` can generate in one click:
 * **Base (Current Working Directory):**
 	* `item_proto` (Compiled base proto)
 	* `mob_proto` (Compiled base proto)
